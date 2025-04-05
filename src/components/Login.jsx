@@ -30,21 +30,23 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-8 rounded shadow-md w-96"
+        className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl w-full max-w-md"
       >
-        <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
+        <h2 className="text-3xl font-bold text-center bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-transparent bg-clip-text mb-6">
+          Login
+        </h2>
 
         {errorMsg && (
-          <div className="bg-red-100 text-red-700 p-2 rounded mb-4 text-sm">
+          <div className="bg-red-100 dark:bg-red-800 text-red-700 dark:text-red-200 p-2 rounded mb-4 text-sm">
             {errorMsg}
           </div>
         )}
 
         <div className="mb-4">
-          <label htmlFor="email" className="block font-medium text-sm mb-1">
+          <label htmlFor="email" className="block font-medium text-sm text-gray-700 dark:text-gray-200 mb-1">
             Email
           </label>
           <input
@@ -52,13 +54,13 @@ const Login = () => {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded outline-none focus:ring-2 focus:ring-blue-400"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded outline-none focus:ring-2 focus:ring-purple-400 dark:bg-gray-700 dark:text-white"
             required
           />
         </div>
 
         <div className="mb-6">
-          <label htmlFor="password" className="block font-medium text-sm mb-1">
+          <label htmlFor="password" className="block font-medium text-sm text-gray-700 dark:text-gray-200 mb-1">
             Password
           </label>
           <input
@@ -66,14 +68,14 @@ const Login = () => {
             name="password"
             value={formData.password}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded outline-none focus:ring-2 focus:ring-blue-400"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded outline-none focus:ring-2 focus:ring-purple-400 dark:bg-gray-700 dark:text-white"
             required
           />
         </div>
 
         <button
           type="submit"
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded transition"
+          className="w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:brightness-110 text-white py-2 rounded-xl transition shadow-md"
         >
           Login
         </button>

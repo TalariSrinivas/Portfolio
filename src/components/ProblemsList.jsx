@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
-
 const ProblemList = () => {
   const [problems, setProblems] = useState([]);
   const navigate = useNavigate();
@@ -14,8 +13,11 @@ const ProblemList = () => {
       .then(res => {
         if (Array.isArray(res.data)) {
           setProblems(res.data);
+          console.log("problems response: ",res.data);
+          
         } else if (Array.isArray(res.data.problems)) {
           setProblems(res.data.problems);
+          console.log("problems response: ",res.data);
         } else {
           setProblems([]);
         }
@@ -27,21 +29,25 @@ const ProblemList = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 py-10 px-4">
-      <div className="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-lg">
-        <h2 className="text-3xl font-bold text-center text-blue-700 mb-6">Problem List</h2>
+    <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-10 px-4">
+      <div className="max-w-4xl mx-auto bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+        <h2 className="text-3xl font-bold text-center bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-transparent bg-clip-text mb-6">
+          Problem List
+        </h2>
 
         {problems.length === 0 ? (
-          <div className="text-center text-gray-500">No problems available.</div>
+          <div className="text-center text-gray-500 dark:text-gray-400">No problems available.</div>
         ) : (
-          <ul className="space-y-4 max-h-[500px] overflow-y-auto scrollbar-thin scrollbar-thumb-blue-400 scrollbar-track-gray-200">
+          <ul className="space-y-4 max-h-[500px] overflow-y-auto scrollbar-thin scrollbar-thumb-purple-400 dark:scrollbar-thumb-purple-500 scrollbar-track-purple-100 dark:scrollbar-track-gray-700">
             {problems.map((problem) => (
               <li
                 key={problem._id}
                 onClick={() => navigate(`/problems/${problem._id}`)}
-                className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition duration-200 cursor-pointer shadow-sm hover:shadow-md"
+                className="p-4 bg-purple-500 dark:bg-gray-700 rounded-lg hover:bg-purple-600 dark:hover:bg-gray-600 transition duration-200 cursor-pointer shadow-sm hover:shadow-md"
               >
-                <h3 className="text-lg font-semibold text-blue-800">{problem.title}</h3>
+                <h3 className="text-lg font-semibold text-white">
+                   {problem.questionNumber}.  {problem.title}
+                </h3>
               </li>
             ))}
           </ul>

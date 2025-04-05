@@ -10,6 +10,8 @@ import {
   LogOut,
   UserPlus,
   LayoutDashboard,
+  ChevronRight,
+  ListChecks,
 } from 'lucide-react';
 
 const Navbar = () => {
@@ -21,8 +23,11 @@ const Navbar = () => {
     navigate('/');
   };
 
+  const buttonStyle =
+    'bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold px-4 py-2 rounded-lg shadow-md transition duration-300 flex items-center gap-2';
+
   return (
-    <nav className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white px-6 py-3 shadow-md">
+    <nav className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white px-6 py-3 shadow-md">
       <div className="flex items-center justify-between">
         {/* Left: Logo */}
         <Link to="/" className="text-2xl font-bold flex items-center gap-2">
@@ -33,19 +38,19 @@ const Navbar = () => {
         {/* Center: Main Navigation */}
         <div className="flex items-center gap-6 text-sm font-medium">
           <Link to="/" className="flex items-center gap-1 hover:underline">
-            <Home className="w-4 h-4" /> Home
+            <Home className="w-5 h-5" /> Home
           </Link>
           <Link to="/about" className="flex items-center gap-1 hover:underline">
-            <Info className="w-4 h-4" /> About Us
+            <Info className="w-5 h-5" /> About Us
           </Link>
           <Link to="/services" className="flex items-center gap-1 hover:underline">
-            <Hammer className="w-4 h-4" /> Services
+            <Hammer className="w-5 h-5" /> Services
           </Link>
           <Link to="/contact" className="flex items-center gap-1 hover:underline">
-            <Phone className="w-4 h-4" /> Contact
+            <Phone className="w-5 h-5" /> Contact
           </Link>
           <Link to="/problemList" className="flex items-center gap-1 hover:underline">
-            <Phone className="w-4 h-4" /> ProblemList
+            <ListChecks className="w-5 h-5" /> Problem List
           </Link>
         </div>
 
@@ -54,31 +59,25 @@ const Navbar = () => {
           {isLoggedIn ? (
             <>
               <Link to="/dashboard" className="flex items-center gap-1 hover:underline">
-                <LayoutDashboard className="w-4 h-4" /> Dashboard
+                <LayoutDashboard className="w-5 h-5" /> Dashboard
               </Link>
-              <Link to="/" className="flex items-center gap-1 hover:underline">
-                <User className="w-4 h-4" /> Profile
+              <Link to="/profile" className="flex items-center gap-1 hover:underline">
+                <User className="w-5 h-5" /> Profile
               </Link>
-              <button
-                onClick={handleLogout}
-                className="bg-gradient-to-r from-red-500 to-red-700 hover:from-red-600 hover:to-red-800 text-white px-3 py-1 rounded-md flex items-center gap-1 transition duration-200"
-              >
-                <LogOut className="w-4 h-4" /> Logout
+              <button onClick={handleLogout} className={buttonStyle}>
+                <LogOut className="w-5 h-5" /> Logout
+                <ChevronRight className="w-4 h-4" />
               </button>
             </>
           ) : (
             <>
-              <Link
-                to="/Login"
-                className="bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 text-white px-3 py-1 rounded-md flex items-center gap-1 transition duration-200"
-              >
-                <LogIn className="w-4 h-4" /> Login
+              <Link to="/login" className={buttonStyle}>
+                <LogIn className="w-5 h-5" /> Login
+                <ChevronRight className="w-4 h-4" />
               </Link>
-              <Link
-                to="/Signup"
-                className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-3 py-1 rounded-md flex items-center gap-1 transition duration-200"
-              >
-                <UserPlus className="w-4 h-4" /> Signup
+              <Link to="/signup" className={buttonStyle}>
+                <UserPlus className="w-5 h-5" /> Signup
+                <ChevronRight className="w-4 h-4" />
               </Link>
             </>
           )}
