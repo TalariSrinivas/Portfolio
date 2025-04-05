@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 const Login = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -19,7 +21,7 @@ const Login = () => {
     setErrorMsg('');
 
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', formData);
+      const res = await axios.post(`${backendUrl}/api/auth/login`, formData);
       localStorage.setItem('token', res.data.token);
       navigate('/dashboard');
     } catch (err) {

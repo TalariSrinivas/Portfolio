@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
+
 const Signup = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -29,7 +32,7 @@ const Signup = () => {
     }
 
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/signup', formData);
+      const res = await axios.post(`${backendUrl}/api/auth/signup`, formData);
       localStorage.setItem('token', res.data.token);
       navigate('/dashboard');
     } catch (err) {

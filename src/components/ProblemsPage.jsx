@@ -4,15 +4,20 @@ import axios from 'axios';
 import ProblemDetails from './ProblemDetails';
 import CodeEditor from './CodeEditor';
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
+
 const ProblemsPage = () => {
   const { id } = useParams(); // get problem ID from route
   const [code, setCode] = useState("// Write your code here");
   const [language, setLanguage] = useState("cpp"); // default language
   const [results, setResults] = useState(null);
 
+
+
   const handleSubmit = async () => {
     try {
-      const res = await axios.post('http://localhost:5000/api/submit', {
+      const res = await axios.post(`${backendUrl}/api/submit`, {
         code,
         language,
         problemId: id,

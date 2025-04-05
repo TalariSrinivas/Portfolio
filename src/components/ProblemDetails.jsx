@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 const ProblemDetails = ({ problemId }) => {
   const [problem, setProblem] = useState(null);
 
   useEffect(() => {
     if (!problemId) return;
 
-    axios.get(`http://localhost:5000/api/problems/${problemId}`)
+    axios.get(`${backendUrl}/api/problems/${problemId}`)
       .then(res => setProblem(res.data))
       .catch(err => {
         console.error("Error fetching problem details:", err);

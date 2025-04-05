@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
+
 const ProblemList = () => {
   const [problems, setProblems] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/problems')
+    axios.get(`${backendUrl}/api/problems`)
       .then(res => {
         if (Array.isArray(res.data)) {
           setProblems(res.data);
