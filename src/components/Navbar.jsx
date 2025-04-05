@@ -56,7 +56,7 @@ const Navbar = () => {
               <Link to="/dashboard" className="flex items-center gap-1 hover:underline">
                 <LayoutDashboard className="w-4 h-4" /> Dashboard
               </Link>
-              <Link to="/profile" className="flex items-center gap-1 hover:underline">
+              <Link to="/" className="flex items-center gap-1 hover:underline">
                 <User className="w-4 h-4" /> Profile
               </Link>
               <button
