@@ -23,7 +23,7 @@ const Login = () => {
     try {
       const res = await axios.post(`${backendUrl}/api/auth/login`, formData);
       localStorage.setItem('token', res.data.token);
-      navigate('/dashboard');
+      navigate('/');
     } catch (err) {
       setErrorMsg(err.response?.data?.message || 'Login failed');
     }
