@@ -10,12 +10,12 @@ const teamMembers = [
   {
     name: 'Md Azeez',
     role: 'Backend Engineer',
-    image: '/Azeez.png',
+    image: '/azeez.jpg',
   },
   {
     name: 'Sk Saboor',
     role: 'UI/UX Designer',
-    image: '/Saboor.png',
+    image: '/saboor.jpg',
   },
 ];
 

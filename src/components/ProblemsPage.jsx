@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import ProblemDetails from './ProblemDetails';
 import CodeEditor from './CodeEditor';
+
+import { useUser } from '../context'; // adjust path if needed
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -12,12 +14,23 @@ const ProblemsPage = () => {
   const [language, setLanguage] = useState("cpp");
   const [results, setResults] = useState(null);
 
+  const { user } = useUser();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) {
+      navigate('/login');
+    }
+  }, [user, navigate])
+
   const handleSubmit = async () => {
     try {
       const res = await axios.post(`${backendUrl}/api/submit`, {
         code,
         language,
         problemId: id,
+        email: user,
       });
       setResults(res.data.results);
     } catch (err) {
@@ -27,6 +40,8 @@ const ProblemsPage = () => {
   };
 
   return (
+    <>
+      <div className='w-full bg-black text-3xl text-white'>{user}</div>
     <div className="flex min-h-screen bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 text-gray-800 dark:text-gray-100">
       {/* Problem Details */}
       <div className="w-1/2 p-6 overflow-auto border-r border-gray-300 dark:border-gray-700">
@@ -94,6 +109,7 @@ const ProblemsPage = () => {
         </button>
       </div>
     </div>
+    </>
   );
 };
 

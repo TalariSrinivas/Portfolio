@@ -18,19 +18,20 @@ import Services from './components/Services';
 import Contact from './components/Contact';
 import ProblemsList from './components/ProblemsList';
 import ProblemsPage from './components/ProblemsPage';
-;
+import Profile from './components/Profile'; // ✅ NEW
+import Leaderboard from './components/Leaderboard';
+
 
 // Define Routes
 const router = createBrowserRouter([
   {
     path: '/',
-    element:(
+    element: (
       <>
-      <Navbar/>
-      <Home/>
+        <Navbar />
+        <Home />
       </>
     ),
-  
   },
   {
     path: '/about',
@@ -38,6 +39,15 @@ const router = createBrowserRouter([
       <>
         <Navbar />
         <AboutUs />
+      </>
+    ),
+  },
+  {
+    path: '/leaderboard',
+    element: (
+      <>
+        <Navbar />
+        <Leaderboard />
       </>
     ),
   },
@@ -59,6 +69,8 @@ const router = createBrowserRouter([
       </>
     ),
   },
+  
+  
   {
     path: '/services',
     element: (
@@ -66,7 +78,7 @@ const router = createBrowserRouter([
         <Navbar />
         <Services />
       </>
-    )
+    ),
   },
   {
     path: '/login',
@@ -78,7 +90,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: '/Signup',
+    path: '/signup',
     element: (
       <>
         <Navbar />
@@ -87,8 +99,13 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path:'/Dashboard',
-    element:<Dashboard/>
+    path: '/dashboard',
+    element: (
+    <>
+      <Navbar />
+      <Dashboard />
+    </>
+    ),
   },
   {
     path: '/problems/:id',
@@ -96,6 +113,15 @@ const router = createBrowserRouter([
       <>
         <Navbar />
         <ProblemsPage />
+      </>
+    ),
+  },
+  {
+    path: '/profile', // ✅ NEW
+    element: (
+      <>
+        <Navbar />
+        <Profile />
       </>
     ),
   },

@@ -12,14 +12,20 @@ import {
   LayoutDashboard,
   ChevronRight,
   ListChecks,
+  GraduationCap,
+  Award,
 } from 'lucide-react';
 
+import { useUser } from '../context';
+
 const Navbar = () => {
+  const { user, logout } = useUser();
   const navigate = useNavigate();
   const isLoggedIn = !!localStorage.getItem('token');
 
   const handleLogout = () => {
     localStorage.removeItem('token');
+    logout();
     navigate('/');
   };
 
@@ -36,7 +42,7 @@ const Navbar = () => {
         </Link>
 
         {/* Center: Main Navigation */}
-        <div className="flex items-center gap-6 text-sm font-medium">
+        <div className="flex items-center gap-6 text-sm font-medium relative">
           <Link to="/" className="flex items-center gap-1 hover:underline">
             <Home className="w-5 h-5" /> Home
           </Link>
@@ -49,9 +55,29 @@ const Navbar = () => {
           <Link to="/contact" className="flex items-center gap-1 hover:underline">
             <Phone className="w-5 h-5" /> Contact
           </Link>
-          <Link to="/problemList" className="flex items-center gap-1 hover:underline">
-            <ListChecks className="w-5 h-5" /> Problem List
-          </Link>
+
+          {/* Learn Dropdown */}
+          <div className="relative group">
+            <div className="flex items-center gap-1 hover:underline cursor-pointer">
+              <GraduationCap className="w-5 h-5" /> Learn
+            </div>
+            <div className="absolute left-0 top-full mt-2 bg-white text-gray-800 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 z-50 min-w-[180px]">
+              <Link
+                to="/problemList"
+                className="block px-4 py-2 hover:bg-purple-100 flex items-center gap-2"
+              >
+                <ListChecks className="w-4 h-4 text-blue-600" />
+                <span>Problem List</span>
+              </Link>
+              <Link
+                to="/leaderboard"
+                className="block px-4 py-2 hover:bg-purple-100 flex items-center gap-2"
+              >
+                <Award className="w-4 h-4 text-yellow-600" />
+                <span>Leaderboard</span>
+              </Link>
+            </div>
+          </div>
         </div>
 
         {/* Right: Auth Controls */}

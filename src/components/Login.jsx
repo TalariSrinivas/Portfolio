@@ -3,11 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
+import { useUser } from '../context';
 
 const Login = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [errorMsg, setErrorMsg] = useState('');
+
+    const { user,login } = useUser();
 
   const handleChange = (e) => {
     setFormData(prev => ({
@@ -23,6 +26,7 @@ const Login = () => {
     try {
       const res = await axios.post(`${backendUrl}/api/auth/login`, formData);
       localStorage.setItem('token', res.data.token);
+      login(formData.email)
       navigate('/');
     } catch (err) {
       setErrorMsg(err.response?.data?.message || 'Login failed');
