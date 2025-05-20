@@ -19,7 +19,7 @@ import {
 import { Trophy } from 'lucide-react';
 import { useUser } from '../context';
 import { PlusCircle } from 'lucide-react';
-
+import { Bot } from 'lucide-react';
 const Navbar = () => {
   const { user, logout } = useUser();
   const navigate = useNavigate();
@@ -39,7 +39,8 @@ const Navbar = () => {
       <div className="flex items-center justify-between">
         {/* Left: Logo */}
         <Link to="/" className="text-2xl font-bold flex items-center gap-2">
-          <Hammer className="w-6 h-6" />
+          
+        <img src="/logo.jpeg" alt="Logo" className="w-10 h-10 rounded-full" />
           <span>CodeMaster</span>
         </Link>
 
@@ -104,31 +105,7 @@ const Navbar = () => {
               
             </div>
           </div>
-           {/* Contest Dropdown */}
-           <div className="relative group">
-            <div className="flex items-center gap-1 hover:underline cursor-pointer">
-            <Trophy className="w-5 h-5" /> Contest
-            </div>
-            <div className="absolute left-0 top-full mt-2 bg-white text-gray-800 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 z-50 min-w-[180px]">
-  
-            <Link
-                to="/contest"
-                className="block px-4 py-2 hover:bg-purple-100 flex items-center gap-2"
-              >
-                <PlusCircle className="w-5 h-5 text-blue-600" />
-                <span>Create Contest</span>
-            </Link>
-            <Link
-                to="/cpp"
-                className="block px-4 py-2 hover:bg-purple-100 flex items-center gap-2"
-              >
-                <LogIn className="w-5 h-5 text-blue-600" />
-                <span>Join Contest</span>
-            </Link>
-              
-              
-            </div>
-          </div>
+           
           <Link to="/about" className="flex items-center gap-1 hover:underline">
             <Info className="w-5 h-5" /> About Us
           </Link>
@@ -137,6 +114,9 @@ const Navbar = () => {
           </Link>
           <Link to="/contact" className="flex items-center gap-1 hover:underline">
             <Phone className="w-5 h-5" /> Contact
+          </Link>
+          <Link to="/codebot" className="flex items-center gap-1 hover:underline">
+          <Bot className="w-5 h-5" /> ChatBot
           </Link>
         </div>
 
