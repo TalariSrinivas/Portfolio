@@ -1,91 +1,178 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState } from "react";
 
-const backendUrl = import.meta.env.VITE_BACKEND_URL;
-import { useUser } from '../context';
+function Contact() {
+  const [success, setSuccess] = useState(false);
 
-const Login = () => {
-  const navigate = useNavigate();
-  const [formData, setFormData] = useState({ email: '', password: '' });
-  const [errorMsg, setErrorMsg] = useState('');
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    setSuccess(false);
 
-    const { user,login } = useUser();
+    const formData = new FormData(event.target);
+    formData.append("access_key", "1e3be67f-e689-4a6c-8d67-8e7f9555b029");
 
-  const handleChange = (e) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
-  };
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setErrorMsg('');
+    const res = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: json,
+    }).then((res) => res.json());
 
-    try {
-      const res = await axios.post(`${backendUrl}/api/auth/login`, formData);
-      localStorage.setItem('token', res.data.token);
-      login(formData.email)
-      navigate('/');
-    } catch (err) {
-      setErrorMsg(err.response?.data?.message || 'Login failed');
+    if (res.success) {
+      console.log("Success", res);
+      setSuccess(true);
+      event.target.reset();
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl w-full max-w-md"
-      >
-        <h2 className="text-3xl font-bold text-center bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-transparent bg-clip-text mb-6">
-          Login
-        </h2>
+    <>
+      <style>{`
+        @property --a {
+          syntax: '<angle>';
+          inherits: false;
+          initial-value: 0deg;
+        }
 
-        {errorMsg && (
-          <div className="bg-red-100 dark:bg-red-800 text-red-700 dark:text-red-200 p-2 rounded mb-4 text-sm">
-            {errorMsg}
-          </div>
-        )}
+        .about-border {
+          border-radius: 1rem;
+          border: 2px solid transparent;
+          background: linear-gradient(#0f0f0f, #0f0f0f) padding-box,
+            conic-gradient(
+              from 0deg,
+              #f72585,
+              #7209b7,
+              #3a0ca3,
+              #4361ee,
+              #4cc9f0,
+              #f72585
+            ) border-box;
+        }
 
-        <div className="mb-4">
-          <label htmlFor="email" className="block font-medium text-sm text-gray-700 dark:text-gray-200 mb-1">
-            Email
-          </label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded outline-none focus:ring-2 focus:ring-purple-400 dark:bg-gray-700 dark:text-white"
-            required
-          />
+        .download-btn-wrapper {
+          position: relative;
+          display: inline-block;
+          border-radius: 12px;
+          padding: 8px;
+          background: transparent;
+          z-index: 0;
+          width: 100%;
+        }
+
+        .download-btn-wrapper::before {
+          content: '';
+          position: absolute;
+          top: 0; left: 0; right: 0; bottom: 0;
+          border-radius: inherit;
+          padding: 2px;
+          background: conic-gradient(from var(--a), #f72585, #7209b7, #3a0ca3, #4361ee, #4cc9f0, #f72585);
+          -webkit-mask:
+            linear-gradient(#000 0 0) content-box,
+            linear-gradient(#000 0 0);
+          -webkit-mask-composite: destination-out;
+          mask-composite: exclude;
+          animation: spin 4s linear infinite;
+          z-index: -1;
+        }
+
+        .download-btn {
+          position: relative;
+          border-radius: 10px;
+          background: black;
+          color: white;
+          padding: 0.5rem 1.5rem;
+          font-weight: 600;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.5rem;
+          z-index: 1;
+          text-decoration: none;
+          user-select: none;
+          transition: background-color 0.3s ease;
+          width: 100%;
+        }
+
+        .download-btn:hover {
+          background-color: #1a1a1a;
+        }
+
+        @keyframes spin {
+          to {
+            --a: 360deg;
+          }
+        }
+      `}</style>
+
+      <div className="min-h-screen bg-[#0f0f0f] px-6 md:px-16 py-16 flex items-center justify-center text-white">
+        <div className="about-border w-full max-w-xl p-8 bg-black bg-opacity-80 rounded-xl shadow-lg">
+          <h2 className="text-3xl font-bold mb-6 text-purple-500 text-center">
+            Contact Me
+          </h2>
+
+          {success && (
+            <div className="mb-4 p-4 bg-green-900 border border-green-700 text-green-400 rounded">
+              ✅ Message sent successfully!
+            </div>
+          )}
+
+          <form onSubmit={onSubmit} className="space-y-6 font-mono">
+            <div>
+              <label htmlFor="name" className="block text-sm mb-1 text-gray-300">
+                Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                required
+                placeholder="Your name"
+                className="w-full rounded-md border border-gray-700 bg-[#1a1a1a] text-white p-3 focus:ring-2 focus:ring-purple-600 focus:outline-none"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="email" className="block text-sm mb-1 text-gray-300">
+                Email
+              </label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                required
+                placeholder="you@example.com"
+                className="w-full rounded-md border border-gray-700 bg-[#1a1a1a] text-white p-3 focus:ring-2 focus:ring-purple-600 focus:outline-none"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="message" className="block text-sm mb-1 text-gray-300">
+                Message
+              </label>
+              <textarea
+                name="message"
+                id="message"
+                required
+                rows="5"
+                placeholder="Write your message..."
+                className="w-full rounded-md border border-gray-700 bg-[#1a1a1a] text-white p-3 focus:ring-2 focus:ring-purple-600 focus:outline-none"
+              ></textarea>
+            </div>
+
+            <div className="download-btn-wrapper">
+              <button type="submit" className="download-btn">
+                Submit
+              </button>
+            </div>
+          </form>
         </div>
-
-        <div className="mb-6">
-          <label htmlFor="password" className="block font-medium text-sm text-gray-700 dark:text-gray-200 mb-1">
-            Password
-          </label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded outline-none focus:ring-2 focus:ring-purple-400 dark:bg-gray-700 dark:text-white"
-            required
-          />
-        </div>
-
-        <button
-          type="submit"
-          className="w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:brightness-110 text-white py-2 rounded-xl transition shadow-md"
-        >
-          Login
-        </button>
-      </form>
-    </div>
+      </div>
+    </>
   );
-};
+}
 
-export default Login;
+export default Contact;

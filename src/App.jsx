@@ -17,7 +17,7 @@ import Signup from './components/Signup';
 import Dashboard from './components/Dashboard';
 import Problem from './components/Problem';
 import Home from './components/Home';
-import AboutUs from './components/AboutUs';
+import About from './components/About';
 import Services from './components/Services';
 import Contact from './components/Contact';
 import ProblemsList from './components/ProblemsList';
@@ -42,7 +42,7 @@ const router = createBrowserRouter([
     element: (
       <>
         <Navbar />
-        <AboutUs />
+        <About />
       </>
     ),
   },

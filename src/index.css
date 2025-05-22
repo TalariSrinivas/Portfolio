@@ -1,1 +1,9 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 @import "tailwindcss";
+body {
+  font-family: 'Space Mono', monospace;
+  background-color: #0f0f10; /* Dark background as in the image */
+  color: white;
+}

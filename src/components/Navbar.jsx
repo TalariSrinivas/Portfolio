@@ -1,156 +1,136 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {
   Home,
-  Info,
-  Phone,
-  Hammer,
-  Code,
-  User,
-  LogIn,
-  LogOut,
-  UserPlus,
-  LayoutDashboard,
-  ChevronRight,
-  ListChecks,
-  GraduationCap,
-  Award,
+  Briefcase,
+  FileText,
+  Layers,
+  Mail,
 } from 'lucide-react';
-import { Trophy } from 'lucide-react';
-import { useUser } from '../context';
-import { PlusCircle } from 'lucide-react';
-import { Bot } from 'lucide-react';
+import logo from '/B3.png'; // Adjust this path as needed
+
 const Navbar = () => {
-  const { user, logout } = useUser();
-  const navigate = useNavigate();
-  const isLoggedIn = !!localStorage.getItem('token');
+  const location = useLocation();
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    logout();
-    navigate('/');
-  };
-
-  const buttonStyle =
-    'bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold px-4 py-2 rounded-lg shadow-md transition duration-300 flex items-center gap-2';
+  const navLinks = [
+    { label: 'Home', icon: <Home size={20} />, href: '/' },
+    { label: 'Portfolio', icon: <Briefcase size={20} />, href: '/about' },
+    { label: 'Resume', icon: <FileText size={20} />, href: '/contact' },
+    { label: 'Work', icon: <Layers size={20} />, href: '/services' },
+    { label: 'Contact', icon: <Mail size={20} />, href: '/login' },
+  ];
 
   return (
-    <nav className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white px-6 py-3 shadow-md">
-      <div className="flex items-center justify-between">
-        {/* Left: Logo */}
-        <Link to="/" className="text-2xl font-bold flex items-center gap-2">
-          
-        <img src="/logo.jpeg" alt="Logo" className="w-10 h-10 rounded-full" />
-          <span>CodeMaster</span>
-        </Link>
+    <>
+      <style>{`
+        @keyframes spin {
+          to {
+            --a: 360deg;
+          }
+        }
 
-        {/* Center: Main Navigation */}
-        <div className="flex items-center gap-6 text-sm font-medium relative">
-          <Link to="/" className="flex items-center gap-1 hover:underline">
-            <Home className="w-5 h-5" /> Home
-          </Link>
-          
-          
+        @property --a {
+          syntax: '<angle>';
+          inherits: false;
+          initial-value: 0deg;
+        }
 
-          {/* Learn Dropdown */}
-          <div className="relative group">
-            <div className="flex items-center gap-1 hover:underline cursor-pointer">
-              <GraduationCap className="w-5 h-5" /> Learn
-            </div>
-            <div className="absolute left-0 top-full mt-2 bg-white text-gray-800 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 z-50 min-w-[180px]">
-              <Link
-                to="/problemList"
-                className="block px-4 py-2 hover:bg-purple-100 flex items-center gap-2"
-              >
-                <ListChecks className="w-4 h-4 text-blue-600" />
-                <span>Problem List</span>
-              </Link>
-              
-              <Link
-                to="/leaderboard"
-                className="block px-4 py-2 hover:bg-purple-100 flex items-center gap-2"
-              >
-                <Award className="w-4 h-4 text-yellow-600" />
-                <span>Leaderboard</span>
-              </Link>
-              <Link
-                to="/c"
-                className="block px-4 py-2 hover:bg-purple-100 flex items-center gap-2"
-              >
-                <img src="/c.png" alt="c" className="w-5 h-5" />
+        .hire-btn-wrapper {
+          position: relative;
+          display: inline-block;
+          border-radius: 4px;
+          padding: 2px;
+          background: transparent;
+          z-index: 0;
+          width: 100px;
+          height: 40px;
+        }
 
-                <span>Learn C</span>
-              </Link>
+        .hire-btn-wrapper::before {
+          content: '';
+          position: absolute;
+          top: 0; left: 0; right: 0; bottom: 0;
+          border-radius: inherit;
+          padding: 2px;
+          background: conic-gradient(from var(--a), #f72585, #7209b7, #3a0ca3, #4361ee, #4cc9f0, #f72585);
+          -webkit-mask:
+            linear-gradient(#000 0 0) content-box,
+            linear-gradient(#000 0 0);
+          -webkit-mask-composite: destination-out;
+          mask-composite: exclude;
+          animation: spin 4s linear infinite;
+          z-index: -1;
+        }
+
+        .hire-btn {
+          position: relative;
+          border-radius: 4px;
+          background: black;
+          color: white;
+          padding: 0;
+          width: 100%;
+          height: 100%;
+          font-weight: 600;
+          text-decoration: none;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 1;
+          transition: background-color 0.3s ease;
+        }
+
+        .hire-btn:hover {
+          background-color: #1a1a1a;
+        }
+
+        .glow {
+          animation: pinkGlow 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes pinkGlow {
+          from {
+            text-shadow: 0 0 5px #f72585, 0 0 10px #f72585, 0 0 15px #f72585;
+          }
+          to {
+            text-shadow: 0 0 10px #f72585, 0 0 20px #f72585, 0 0 30px #f72585;
+          }
+        }
+      `}</style>
+
+      <nav className="w-full flex items-center justify-between px-6 md:px-12 py-4 bg-[#0f0f0f] text-white shadow-md sticky top-0 z-50">
+        {/* Logo with Image */}
+        <div className="flex items-center gap-2 text-2xl font-bold font-mono tracking-tight">
+          <img src={logo} alt="logo" className="w-10 h-10 rounded-full" />
+          Srinivas<span className="text-pink-500">.</span>
+        </div>
+
+        {/* Navigation Links */}
+        <div className="hidden md:flex items-center space-x-8 font-mono text-base">
+          {navLinks.map(({ label, icon, href }) => {
+            const isActive = location.pathname === href;
+            return (
               <Link
-                to="/cpp"
-                className="block px-4 py-2 hover:bg-purple-100 flex items-center gap-2"
+                key={label}
+                to={href}
+                className={`transition flex items-center gap-1 ${
+                  isActive ? 'text-pink-500 glow' : 'hover:text-pink-500'
+                }`}
               >
-                <img src="/c++.png" alt="Java" className="w-5 h-5" />
-                <span>Learn C++</span>
+                {icon}
+                {label}
               </Link>
-              <Link
-                to="/java"
-                className="block px-4 py-2 hover:bg-purple-100 flex items-center gap-2"
-              >
-                <img src="/java.png" alt="Java" className="w-5 h-5" />
-                <span>Learn Java</span>
-              </Link>
-              <Link
-                to="/python"
-                className="block px-4 py-2 hover:bg-purple-100 flex items-center gap-2"
-              >
-                <img src="/python.png" alt="Java" className="w-5 h-5" />
-                <span>Learn Python</span>
-              </Link>
-              
-            </div>
+            );
+          })}
+
+          {/* Hire Me Button */}
+          <div className="hire-btn-wrapper ml-4">
+            <a href="/login" className="hire-btn">
+              Hire me
+            </a>
           </div>
-           
-          <Link to="/about" className="flex items-center gap-1 hover:underline">
-            <Info className="w-5 h-5" /> About Us
-          </Link>
-          <Link to="/services" className="flex items-center gap-1 hover:underline">
-            <Hammer className="w-5 h-5" /> Services
-          </Link>
-          <Link to="/contact" className="flex items-center gap-1 hover:underline">
-            <Phone className="w-5 h-5" /> Contact
-          </Link>
-          <Link to="/codebot" className="flex items-center gap-1 hover:underline">
-          <Bot className="w-5 h-5" /> ChatBot
-          </Link>
         </div>
-
-        
-        {/* Right: Auth Controls */}
-        <div className="flex items-center gap-4">
-          {isLoggedIn ? (
-            <>
-              <Link to="/dashboard" className="flex items-center gap-1 hover:underline">
-                <LayoutDashboard className="w-5 h-5" /> Dashboard
-              </Link>
-              <Link to="/profile" className="flex items-center gap-1 hover:underline">
-                <User className="w-5 h-5" /> Profile
-              </Link>
-              <button onClick={handleLogout} className={buttonStyle}>
-                <LogOut className="w-5 h-5" /> Logout
-                <ChevronRight className="w-4 h-4" />
-              </button>
-            </>
-          ) : (
-            <>
-              <Link to="/login" className={buttonStyle}>
-                <LogIn className="w-5 h-5" /> Login
-                <ChevronRight className="w-4 h-4" />
-              </Link>
-              <Link to="/signup" className={buttonStyle}>
-                <UserPlus className="w-5 h-5" /> Signup
-                <ChevronRight className="w-4 h-4" />
-              </Link>
-            </>
-          )}
-        </div>
-      </div>
-    </nav>
+      </nav>
+    </>
   );
 };
 
