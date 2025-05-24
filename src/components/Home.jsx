@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaGithub, FaLinkedin, FaYoutube, FaTwitter } from 'react-icons/fa';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { HiDownload } from 'react-icons/hi';
 
 const Home = () => {
@@ -14,8 +14,9 @@ const Home = () => {
 
         .border-wrapper {
           position: relative;
-          width: 300px;
-          height: 300px;
+          width: 70vw;
+          max-width: 300px;
+          aspect-ratio: 1;
           border-radius: 9999px;
           display: flex;
           align-items: center;
@@ -41,8 +42,8 @@ const Home = () => {
 
         .profile-image {
           position: relative;
-          width: 260px;
-          height: 260px;
+          width: 85%;
+          height: 85%;
           border-radius: 9999px;
           object-fit: cover;
           z-index: 1;
@@ -112,43 +113,37 @@ const Home = () => {
         }
       `}</style>
 
-      <section className="bg-[#0f0f0f] text-white min-h-screen px-6 md:px-16 py-16 flex flex-col md:flex-row items-center justify-between">
+      <section className="bg-[#0f0f0f] text-white min-h-screen px-6 md:px-16 py-16 flex flex-col lg:flex-row items-center justify-between gap-12">
         
         {/* Left Content */}
-        <div className="w-full md:w-1/2 space-y-8">
+        <div className="w-full lg:w-1/2 space-y-8 text-center lg:text-left">
           <p className="text-gray-400 tracking-wide text-sm uppercase font-mono">Software Developer</p>
 
-          <h1 className="text-5xl md:text-6xl font-bold leading-tight md:leading-[1.2]">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
             Hello I’m <br />
             <span className="text-purple-600">Talari Srinivas</span>
           </h1>
 
-          <p className="text-gray-400 font-mono leading-relaxed max-w-md text-sm">
+          <p className="text-gray-400 font-mono leading-relaxed max-w-xl text-sm mx-auto lg:mx-0">
             I excel at crafting elegant digital experiences and I am proficient in various programming languages and technologies.
           </p>
 
           {/* CTA & Socials */}
-          <div className="flex flex-col sm:flex-row sm:items-center gap-6 mt-4">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-6 mt-4 justify-center lg:justify-start">
             <div className="download-btn-wrapper">
-              <a
-                href="/resume.pdf"
-                download
-                className="download-btn"
-              >
+              <a href="/resume.pdf" download className="download-btn">
                 Download Resume <HiDownload className="text-lg" />
               </a>
             </div>
 
-            <div className="flex gap-5 text-purple-600 text-xl">
+            <div className="flex gap-5 text-purple-600 text-xl justify-center sm:justify-start">
               <a href="https://github.com/TalariSrinivas" className="hover:text-purple-500 transition"><FaGithub /></a>
               <a href="https://www.linkedin.com/in/talari-srinivas/" className="hover:text-purple-500 transition"><FaLinkedin /></a>
-              
-              
             </div>
           </div>
 
           {/* Stats Section */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-12 text-center sm:text-left">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-12 text-center">
             <div>
               <h2 className="text-3xl font-bold">12</h2>
               <p className="text-gray-400 text-sm mt-1">Years of<br />experience</p>
@@ -168,14 +163,10 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Right - Image with Circular Border and Vignette */}
-        <div className="w-full md:w-1/2 mt-12 md:mt-0 flex justify-center">
+        {/* Right - Image */}
+        <div className="w-full lg:w-1/2 flex justify-center">
           <div className="border-wrapper">
-            <img
-              src="/s4.png"
-              alt="Luke Coleman"
-              className="profile-image"
-            />
+            <img src="/s3.png" alt="Srinivas" className="profile-image" />
             <div className="vignette" />
           </div>
         </div>

@@ -4,17 +4,17 @@ const projects = [
   {
     title: 'Rgukt-Game',
     description: 'Virtual Rgukt University Game Using Unity, Where we can experience the virual world of Our University',
-    image: 'game.jpeg',
+    image: 'game1.jpg',
     siteLink: 'https://rgukt-game.netlify.app/',
     sourceCode: 'https://github.com/anilgummula/rgukt_game',
     status: 'complete',
   },
   {
-    title: 'Chatbot BotGPT',
-    description: 'A chatbot app in which you can ask whatever queries want to ask to our chatbot',
-    image: '/images/chatbot.png',
-    siteLink: '#',
-    sourceCode: '#',
+    title: 'Code Masters',
+    description: 'CodeMaster is an interactive coding platform designed for practicing problems, and competing . ',
+    image: '/code.png',
+    siteLink: 'https://codemasters10.netlify.app/',
+    sourceCode: 'https://github.com/TalariSrinivas/CodeMaster.git',
     status: 'complete',
   },
   {
@@ -46,7 +46,6 @@ const Projects = () => {
             ) border-box;
         }
 
-        /* Scoped button styles to avoid conflicts with Navbar */
         .project-hire-btn-wrapper {
           position: relative;
           display: inline-block;
@@ -99,6 +98,47 @@ const Projects = () => {
         @keyframes spin {
           to {
             --a: 360deg;
+          }
+        }
+
+        /* Responsive tweaks for smaller screens ONLY */
+        @media (max-width: 767px) {
+          /* Reduce padding on section */
+          section {
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+            padding-top: 2rem !important;
+            padding-bottom: 2rem !important;
+          }
+          
+          /* Shrink image size */
+          .about-border img {
+            width: 64px !important;
+            height: 64px !important;
+            margin-bottom: 1rem !important;
+          }
+
+          /* Reduce title font size */
+          .about-border h3 {
+            font-size: 1.5rem !important;
+            margin-bottom: 0.5rem !important;
+          }
+
+          /* Reduce description font size */
+          .about-border p {
+            font-size: 0.875rem !important;
+            margin-bottom: 1rem !important;
+          }
+
+          /* Reduce button padding & font size */
+          .project-hire-btn {
+            padding: 0.35rem 1rem !important;
+            font-size: 0.875rem !important;
+          }
+
+          /* Adjust grid gap */
+          .grid {
+            gap: 1.5rem !important;
           }
         }
       `}</style>

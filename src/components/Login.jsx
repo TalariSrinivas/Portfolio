@@ -61,6 +61,8 @@ function Contact() {
           background: transparent;
           z-index: 0;
           width: 100%;
+          max-width: 300px;
+          margin: 0 auto;
         }
 
         .download-btn-wrapper::before {
@@ -84,7 +86,7 @@ function Contact() {
           border-radius: 10px;
           background: black;
           color: white;
-          padding: 0.5rem 1.5rem;
+          padding: 0.75rem 1.5rem;
           font-weight: 600;
           display: inline-flex;
           align-items: center;
@@ -108,8 +110,8 @@ function Contact() {
         }
       `}</style>
 
-      <div className="min-h-screen bg-[#0f0f0f] px-6 md:px-16 py-16 flex items-center justify-center text-white">
-        <div className="about-border w-full max-w-xl p-8 bg-black bg-opacity-80 rounded-xl shadow-lg">
+      <div className="min-h-screen bg-[#0f0f0f] px-4 sm:px-6 md:px-12 lg:px-16 py-12 flex items-center justify-center text-white">
+        <div className="about-border w-full max-w-lg p-6 sm:p-8 bg-black bg-opacity-80 rounded-xl shadow-lg">
           <h2 className="text-3xl font-bold mb-6 text-purple-500 text-center">
             Contact Me
           </h2>
@@ -159,7 +161,7 @@ function Contact() {
                 required
                 rows="5"
                 placeholder="Write your message..."
-                className="w-full rounded-md border border-gray-700 bg-[#1a1a1a] text-white p-3 focus:ring-2 focus:ring-purple-600 focus:outline-none"
+                className="w-full rounded-md border border-gray-700 bg-[#1a1a1a] text-white p-3 focus:ring-2 focus:ring-purple-600 focus:outline-none resize-none"
               ></textarea>
             </div>
 

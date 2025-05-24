@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
   Home,
@@ -6,11 +6,14 @@ import {
   FileText,
   Layers,
   Mail,
+  Menu,
+  X,
 } from 'lucide-react';
 import logo from '/B3.png'; // Adjust this path as needed
 
 const Navbar = () => {
   const location = useLocation();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const navLinks = [
     { label: 'Home', icon: <Home size={20} />, href: '/' },
@@ -19,6 +22,24 @@ const Navbar = () => {
     { label: 'Work', icon: <Layers size={20} />, href: '/services' },
     { label: 'Contact', icon: <Mail size={20} />, href: '/login' },
   ];
+
+  const renderLinks = () =>
+    navLinks.map(({ label, icon, href }) => {
+      const isActive = location.pathname === href;
+      return (
+        <Link
+          key={label}
+          to={href}
+          onClick={() => setMenuOpen(false)}
+          className={`transition flex items-center gap-1 ${
+            isActive ? 'text-pink-500 glow' : 'hover:text-pink-500'
+          }`}
+        >
+          {icon}
+          {label}
+        </Link>
+      );
+    });
 
   return (
     <>
@@ -104,32 +125,35 @@ const Navbar = () => {
           Srinivas<span className="text-pink-500">.</span>
         </div>
 
-        {/* Navigation Links */}
+        {/* Desktop Nav */}
         <div className="hidden md:flex items-center space-x-8 font-mono text-base">
-          {navLinks.map(({ label, icon, href }) => {
-            const isActive = location.pathname === href;
-            return (
-              <Link
-                key={label}
-                to={href}
-                className={`transition flex items-center gap-1 ${
-                  isActive ? 'text-pink-500 glow' : 'hover:text-pink-500'
-                }`}
-              >
-                {icon}
-                {label}
-              </Link>
-            );
-          })}
-
-          {/* Hire Me Button */}
+          {renderLinks()}
           <div className="hire-btn-wrapper ml-4">
             <a href="/login" className="hire-btn">
               Hire me
             </a>
           </div>
         </div>
+
+        {/* Mobile Toggle Button */}
+        <div className="md:hidden">
+          <button onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle Menu">
+            {menuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
       </nav>
+
+      {/* Mobile Nav Menu (Fixed so it won't scroll with page) */}
+      {menuOpen && (
+        <div className="md:hidden fixed top-16 left-0 right-0 bg-[#0f0f0f] text-white px-6 py-6 space-y-6 font-mono text-base shadow-md z-40">
+          {renderLinks()}
+          <div className="hire-btn-wrapper">
+            <a href="/login" className="hire-btn">
+              Hire me
+            </a>
+          </div>
+        </div>
+      )}
     </>
   );
 };

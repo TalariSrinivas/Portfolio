@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FiBriefcase, FiBook, FiStar, FiUser } from 'react-icons/fi'; // Icons
+import { FiBriefcase, FiBook, FiStar, FiUser } from 'react-icons/fi';
 
 const sections = [
   { id: 'experience', label: 'Experience', icon: <FiBriefcase size={18} /> },
@@ -14,17 +14,16 @@ const About = () => {
   return (
     <>
       <style>{`
-        /* Sidebar buttons */
         .sidebar-button {
           width: 100%;
-          border-radius: 0.75rem; /* rounded-xl */
+          border-radius: 0.75rem;
           font-weight: 600;
           transition: color 0.3s, background-color 0.3s, border 0.3s, box-shadow 0.3s;
           background-color: #1c1c1c;
           color: white;
           border: 2px solid transparent;
           cursor: pointer;
-          padding-left: 1.25rem; /* px-5 */
+          padding-left: 1.25rem;
           padding-right: 1.25rem;
           display: flex;
           align-items: center;
@@ -32,14 +31,17 @@ const About = () => {
           font-size: 1rem;
           line-height: 1.5rem;
           user-select: none;
-          gap: 0.75rem; /* space between icon and label */
+          gap: 0.75rem;
+          flex-shrink: 0;
         }
+
         .sidebar-button:hover {
           background-color: #2a2a2a;
         }
+
         .sidebar-button.active {
           background-color: transparent;
-          color: #a855f7; /* purple-500 */
+          color: #a855f7;
           border-image: conic-gradient(
             from 0deg,
             #f72585,
@@ -55,9 +57,8 @@ const About = () => {
           box-shadow: 0 0 8px #a855f7aa;
         }
 
-        /* Content card styling */
         .about-border {
-          border-radius: 1rem; /* rounded-xl */
+          border-radius: 1rem;
           border: 2px solid transparent;
           background: linear-gradient(black, black) padding-box,
             conic-gradient(
@@ -72,34 +73,50 @@ const About = () => {
         }
       `}</style>
 
-      <section className="flex bg-[#0f0f0f] text-white min-h-screen px-6 md:px-16 pb-16 pt-[0.5cm]">
+      <section className="flex flex-col md:flex-row bg-[#0f0f0f] text-white min-h-screen px-4 sm:px-8 md:px-16 pb-16 pt-16 gap-6">
 
         {/* Sidebar */}
-        <div className="w-1/4 hidden md:flex flex-col space-y-6 pr-10 font-mono min-w-[220px]">
-          <h2 className="text-4xl font-bold mb-4 text-white tracking-wide">Why hire me?</h2>
-          <p className="text-gray-400 text-sm max-w-xs leading-relaxed">
+        <div className="md:w-1/4 min-w-[220px] flex flex-col space-y-6 font-mono">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white tracking-wide">Why hire me?</h2>
+          <p className="text-gray-400 text-sm leading-relaxed max-w-md">
             Passionate about building elegant digital solutions with cutting-edge tech stacks.
           </p>
 
-          {sections.map((section) => (
-            <button
-              key={section.id}
-              onClick={() => setActive(section.id)}
-              className={`sidebar-button ${active === section.id ? 'active' : ''}`}
-              type="button"
-            >
-              {section.icon}
-              <span className="pl-1">{section.label}</span>
-            </button>
-          ))}
+          {/* Mobile Sidebar */}
+          <div className="flex md:hidden overflow-x-auto space-x-3 mt-4 pb-2">
+            {sections.map((section) => (
+              <button
+                key={section.id}
+                onClick={() => setActive(section.id)}
+                className={`sidebar-button whitespace-nowrap ${active === section.id ? 'active' : ''}`}
+              >
+                {section.icon}
+                {section.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Desktop Sidebar */}
+          <div className="hidden md:flex flex-col space-y-3">
+            {sections.map((section) => (
+              <button
+                key={section.id}
+                onClick={() => setActive(section.id)}
+                className={`sidebar-button ${active === section.id ? 'active' : ''}`}
+              >
+                {section.icon}
+                <span className="pl-1">{section.label}</span>
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Main Content */}
         <div className="w-full md:w-3/4 space-y-12">
           {active === 'aboutme' && (
             <div className="about-border p-6 rounded-xl">
-              <h1 className="text-4xl font-bold mb-4 text-purple-500">About Me</h1>
-              <p className="text-gray-300 text-lg leading-relaxed">
+              <h1 className="text-3xl sm:text-4xl font-bold mb-4 text-purple-500">About Me</h1>
+              <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
                 Hello, I'm <span className="text-white font-semibold">Talar Srinivas</span>, a passionate Web developer with a keen eye for the MERN Stack. With a background in IT, I strive to create impactful and visually stunning software solutions that leave a lasting impression.
               </p>
             </div>
@@ -115,12 +132,10 @@ const About = () => {
               </p>
             </div>
           )}
-          
+
           {active === 'skills' && (
             <div className="about-border p-6 rounded-xl">
               <h2 className="text-2xl font-semibold text-purple-400 mb-6">Skills & Expertise</h2>
-
-              {/* Images for each skill */}
               {(() => {
                 const skillImages = {
                   JavaScript: '/images/javascript.png',
@@ -164,17 +179,14 @@ const About = () => {
                       <h3 className="text-purple-300 font-semibold mb-2">Languages:</h3>
                       {renderSkillList(['JavaScript', 'Python', 'C', 'C++', 'Java', 'PHP'])}
                     </div>
-
                     <div className="mb-4">
                       <h3 className="text-purple-300 font-semibold mb-2">Database:</h3>
                       {renderSkillList(['MySQL', 'MongoDB', 'PostgreSQL'])}
                     </div>
-
                     <div className="mb-4">
                       <h3 className="text-purple-300 font-semibold mb-2">Tools:</h3>
                       {renderSkillList(['Git', 'GitHub', 'Unity Game Engine', 'Blender', 'VS Code', 'Docker'])}
                     </div>
-
                     <div>
                       <h3 className="text-purple-300 font-semibold mb-2">Libraries/Frameworks:</h3>
                       {renderSkillList(['React.js', 'Express.js', 'Node.js', 'TailwindCSS', 'pandas', 'NumPy', 'Matplotlib'])}
@@ -195,12 +207,10 @@ const About = () => {
                   Won <strong>1st Prize</strong> from the <strong>CSE branch</strong> for creativity, technical execution, and overall user experience.
                 </li>
               </ul>
-
-              {/* Images row */}
               <div className="flex flex-wrap gap-4 justify-center items-center">
-                <img src="/exp2.jpg" alt="Game Screenshot 1" className="w-60 h-36 object-cover rounded-lg shadow-md" />
-                <img src="/exp1.jpg" alt="Game Screenshot 2" className="w-60 h-36 object-cover rounded-lg shadow-md" />
-                <img src="/exp.jpg" alt="Game Screenshot 3" className="w-60 h-36 object-cover rounded-lg shadow-md" />
+                <img src="/exp2.jpg" alt="Game Screenshot 1" className="w-full sm:w-60 h-36 object-cover rounded-lg shadow-md" />
+                <img src="/exp1.jpg" alt="Game Screenshot 2" className="w-full sm:w-60 h-36 object-cover rounded-lg shadow-md" />
+                <img src="/exp.jpg" alt="Game Screenshot 3" className="w-full sm:w-60 h-36 object-cover rounded-lg shadow-md" />
               </div>
             </div>
           )}
