@@ -1,6 +1,6 @@
-# 🚀 Personal Developer Portfolio
+# 🚀 Portfolio Website
 
-Welcome to my **Developer Portfolio Website**! This is a modern, responsive, and animated portfolio built with **React.js**, **Tailwind CSS**, and other modern tools and libraries. It showcases my skills, projects, and professional experience in a visually appealing and interactive way.
+Welcome to my **Portfolio Website**! This is a modern, responsive, and animated portfolio built with **React.js**, **Tailwind CSS**, and other modern tools and libraries. It showcases my skills, projects, and professional experience in a visually appealing and interactive way.
 
 
 <img width="1900" height="869" alt="Screenshot from 2025-08-02 03-34-10" src="https://github.com/user-attachments/assets/4d4486b6-7401-473b-a3f2-5be73d91822f" />
