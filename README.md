@@ -48,8 +48,8 @@ Here are the technologies used to build this portfolio:
 
 ## 📸 Preview
 
-| Home Page | Portfolio | Experience |
-|----------|-----------|------------|
+| Home Page | About| Works | Experience | Contact |
+|----------|-----------|------------|----------|-----------|
 | ![Home](https://talarisrinivas.netlify.app/#home) | ![About](https://talarisrinivas.netlify.app/#about) | ![Works](https://talarisrinivas.netlify.app/#portfolio) | ![Experience](https://talarisrinivas.netlify.app/#experience) | ![Contact](https://talarisrinivas.netlify.app/#contact) |
 
 ---
